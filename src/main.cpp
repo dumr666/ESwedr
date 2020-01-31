@@ -123,6 +123,5 @@ void loop()
         Serial.print("Web Value: ");
         Serial.println(webValue);
     }
-
     delay(5000);
 }

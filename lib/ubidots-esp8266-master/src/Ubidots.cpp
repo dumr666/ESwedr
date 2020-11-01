@@ -163,7 +163,7 @@ void Ubidots::getContext(char* context_result, IotProtocol iotProtocol) {
   }
 }
 
-String Ubidots::wifiConnect(const char* ssid, const char* password) {
+bool Ubidots::wifiConnect(const char* ssid, const char* password) {
   WiFi.begin(ssid, password);
   uint8_t maxConnectionAttempts = 0;
   while (WiFi.status() != WL_CONNECTED && maxConnectionAttempts < _maxConnectionAttempts) {
@@ -173,19 +173,21 @@ String Ubidots::wifiConnect(const char* ssid, const char* password) {
   }
   if (WiFi.status() == WL_NO_SSID_AVAIL) {
     Serial.println("Your network SSID cannot be reached");
-    return "NOT REACHABLE";
+    return false;
+    //return "NOT REACHABLE";
   }
   if (WiFi.status() == WL_CONNECT_FAILED) {
     Serial.println("Network password incorrect");
-    return "PASSWORD INCORRECT";
+    return false;
+    //return "PASSWORD INCORRECT";
   }
 
   WiFi.setAutoReconnect(true);
   Serial.println(F("WiFi connected"));
   Serial.println(F("IP address: "));
   Serial.println(WiFi.localIP());
-  return WiFi.localIP().toString();
-  //return true;
+  //return WiFi.localIP().toString();
+  return true;
 }
 bool Ubidots::wifiConnected() { return WiFi.status() != WL_CONNECTED; }
 bool Ubidots::serverConnected() { return _cloudProtocol->serverConnected(); }

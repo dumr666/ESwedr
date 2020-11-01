@@ -49,7 +49,7 @@ class Ubidots {
   bool send(const char* device_label, const char* device_name);
   float get(const char* device_label, const char* variable_label);
   void setDebug(bool debug);
-  String wifiConnect(const char* ssid, const char* password);
+  bool wifiConnect(const char* ssid, const char* password);
   bool wifiConnected();
   bool serverConnected();
   void setDeviceType(const char* deviceType);
